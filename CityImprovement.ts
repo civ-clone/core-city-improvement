@@ -1,17 +1,21 @@
-import City from '@civ-clone/core-city/City';
-import Player from '@civ-clone/core-player/Player';
+import { Created, ICreatedRegistry } from './Rules/Created';
+import {
+  DataObject,
+  IDataObject,
+} from '@civ-clone/core-data-object/DataObject';
 import {
   RuleRegistry,
   instance as ruleRegistryInstance,
 } from '@civ-clone/core-rule/RuleRegistry';
-import Created, { ICreatedRegistry } from './Rules/Created';
+import City from '@civ-clone/core-city/City';
+import Player from '@civ-clone/core-player/Player';
 
-export interface ICityImprovement {
+export interface ICityImprovement extends IDataObject {
   city(): City;
   player(): Player;
 }
 
-export class CityImprovement implements ICityImprovement {
+export class CityImprovement extends DataObject implements ICityImprovement {
   #city: City;
   #ruleRegistry: RuleRegistry;
   #player: Player;
@@ -21,6 +25,8 @@ export class CityImprovement implements ICityImprovement {
     city: City,
     ruleRegistry: RuleRegistry = ruleRegistryInstance
   ) {
+    super();
+
     this.#city = city;
     this.#player = player;
     this.#ruleRegistry = ruleRegistry;

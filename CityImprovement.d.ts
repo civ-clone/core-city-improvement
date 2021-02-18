@@ -1,11 +1,17 @@
+import {
+  DataObject,
+  IDataObject,
+} from '@civ-clone/core-data-object/DataObject';
+import { RuleRegistry } from '@civ-clone/core-rule/RuleRegistry';
 import City from '@civ-clone/core-city/City';
 import Player from '@civ-clone/core-player/Player';
-import { RuleRegistry } from '@civ-clone/core-rule/RuleRegistry';
-export interface ICityImprovement {
+export interface ICityImprovement extends IDataObject {
   city(): City;
   player(): Player;
 }
-export declare class CityImprovement implements ICityImprovement {
+export declare class CityImprovement
+  extends DataObject
+  implements ICityImprovement {
   #private;
   constructor(player: Player, city: City, ruleRegistry?: RuleRegistry);
   city(): City;

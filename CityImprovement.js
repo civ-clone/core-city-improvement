@@ -15,17 +15,19 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _city, _ruleRegistry, _player;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CityImprovement = void 0;
-const RuleRegistry_1 = require("@civ-clone/core-rule/RuleRegistry");
 const Created_1 = require("./Rules/Created");
-class CityImprovement {
+const DataObject_1 = require("@civ-clone/core-data-object/DataObject");
+const RuleRegistry_1 = require("@civ-clone/core-rule/RuleRegistry");
+class CityImprovement extends DataObject_1.DataObject {
     constructor(player, city, ruleRegistry = RuleRegistry_1.instance) {
+        super();
         _city.set(this, void 0);
         _ruleRegistry.set(this, void 0);
         _player.set(this, void 0);
         __classPrivateFieldSet(this, _city, city);
         __classPrivateFieldSet(this, _player, player);
         __classPrivateFieldSet(this, _ruleRegistry, ruleRegistry);
-        __classPrivateFieldGet(this, _ruleRegistry).process(Created_1.default, this, city);
+        __classPrivateFieldGet(this, _ruleRegistry).process(Created_1.Created, this, city);
     }
     city() {
         return __classPrivateFieldGet(this, _city);
