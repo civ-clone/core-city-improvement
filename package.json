@@ -1,6 +1,6 @@
 {
   "name": "@civ-clone/core-city-improvement",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "repository": "git@github.com:civ-clone/core-city-improvement.git",
   "keywords": [
@@ -17,11 +17,12 @@
     "ts:compile": "tsc --build tsconfig.json"
   },
   "devDependencies": {
-    "prettier": "^2.1.2",
-    "typescript": "^4.0.3"
+    "prettier": "^2.0.0",
+    "typescript": "^4.0.0"
   },
   "dependencies": {
     "@civ-clone/core-city": "^0.1.0",
+    "@civ-clone/core-city-build": "^0.1.3",
     "@civ-clone/core-data-object": "^0.1.0",
     "@civ-clone/core-player": "^0.1.0",
     "@civ-clone/core-registry": "^0.1.0",

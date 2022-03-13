@@ -15,10 +15,12 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _city, _ruleRegistry, _player;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CityImprovement = void 0;
-const Created_1 = require("./Rules/Created");
-const DataObject_1 = require("@civ-clone/core-data-object/DataObject");
+const Buildable_1 = require("@civ-clone/core-city-build/Buildable");
 const RuleRegistry_1 = require("@civ-clone/core-rule/RuleRegistry");
-class CityImprovement extends DataObject_1.DataObject {
+const Created_1 = require("./Rules/Created");
+// https://github.com/microsoft/TypeScript/issues/4628
+// @ts-expect-error
+class CityImprovement extends Buildable_1.Buildable {
     constructor(player, city, ruleRegistry = RuleRegistry_1.instance) {
         super();
         _city.set(this, void 0);
@@ -27,13 +29,13 @@ class CityImprovement extends DataObject_1.DataObject {
         __classPrivateFieldSet(this, _city, city);
         __classPrivateFieldSet(this, _player, player);
         __classPrivateFieldSet(this, _ruleRegistry, ruleRegistry);
-        __classPrivateFieldGet(this, _ruleRegistry).process(Created_1.Created, this, city);
+        __classPrivateFieldGet(this, _ruleRegistry).process(Created_1.default, this, city);
     }
     city() {
         return __classPrivateFieldGet(this, _city);
     }
-    static createFromObject({ city, player, ruleRegistry = RuleRegistry_1.instance, }) {
-        return new this(player, city, ruleRegistry);
+    static build(city, ruleRegistry = RuleRegistry_1.instance) {
+        return new this(city.player(), city, ruleRegistry);
     }
     player() {
         return __classPrivateFieldGet(this, _player);

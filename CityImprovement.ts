@@ -1,23 +1,22 @@
-import { Created, ICreatedRegistry } from './Rules/Created';
-import {
-  DataObject,
-  IDataObject,
-} from '@civ-clone/core-data-object/DataObject';
+import { Buildable, IBuildable } from '@civ-clone/core-city-build/Buildable';
 import {
   RuleRegistry,
   instance as ruleRegistryInstance,
 } from '@civ-clone/core-rule/RuleRegistry';
 import City from '@civ-clone/core-city/City';
 import Player from '@civ-clone/core-player/Player';
+import Created, { ICreatedRegistry } from './Rules/Created';
 
-export interface ICityImprovement extends IDataObject {
+export interface ICityImprovement extends IBuildable {
   city(): City;
   player(): Player;
 }
 
-export class CityImprovement extends DataObject implements ICityImprovement {
+// https://github.com/microsoft/TypeScript/issues/4628
+// @ts-expect-error
+export class CityImprovement extends Buildable implements ICityImprovement {
   #city: City;
-  #ruleRegistry: RuleRegistry;
+  #ruleRegistry: ICreatedRegistry;
   #player: Player;
 
   constructor(
@@ -31,23 +30,18 @@ export class CityImprovement extends DataObject implements ICityImprovement {
     this.#player = player;
     this.#ruleRegistry = ruleRegistry;
 
-    (this.#ruleRegistry as ICreatedRegistry).process(Created, this, city);
+    this.#ruleRegistry.process(Created, this, city);
   }
 
   city(): City {
     return this.#city;
   }
 
-  static createFromObject({
-    city,
-    player,
-    ruleRegistry = ruleRegistryInstance,
-  }: {
-    city: City;
-    player: Player;
-    ruleRegistry: RuleRegistry;
-  }): CityImprovement {
-    return new this(player, city, ruleRegistry);
+  public static build(
+    city: City,
+    ruleRegistry: RuleRegistry = ruleRegistryInstance
+  ): CityImprovement {
+    return new this(city.player(), city, ruleRegistry);
   }
 
   player(): Player {
