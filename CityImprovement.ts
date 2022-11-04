@@ -9,7 +9,6 @@ import Created, { ICreatedRegistry } from './Rules/Created';
 
 export interface ICityImprovement extends IBuildable {
   city(): City;
-  player(): Player;
 }
 
 // https://github.com/microsoft/TypeScript/issues/4628
@@ -17,17 +16,11 @@ export interface ICityImprovement extends IBuildable {
 export class CityImprovement extends Buildable implements ICityImprovement {
   #city: City;
   #ruleRegistry: ICreatedRegistry;
-  #player: Player;
 
-  constructor(
-    player: Player,
-    city: City,
-    ruleRegistry: RuleRegistry = ruleRegistryInstance
-  ) {
+  constructor(city: City, ruleRegistry: RuleRegistry = ruleRegistryInstance) {
     super();
 
     this.#city = city;
-    this.#player = player;
     this.#ruleRegistry = ruleRegistry;
 
     this.#ruleRegistry.process(Created, this, city);
@@ -41,11 +34,7 @@ export class CityImprovement extends Buildable implements ICityImprovement {
     city: City,
     ruleRegistry: RuleRegistry = ruleRegistryInstance
   ): CityImprovement {
-    return new this(city.player(), city, ruleRegistry);
-  }
-
-  player(): Player {
-    return this.#player;
+    return new this(city, ruleRegistry);
   }
 }
 

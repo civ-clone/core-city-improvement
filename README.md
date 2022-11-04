@@ -1,4 +1,3 @@
 # core-city-improvement
 
-This is a template repo.
-
+The core model for `CityImprovement`s.
