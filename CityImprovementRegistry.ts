@@ -7,20 +7,21 @@ import {
 
 export interface ICityImprovementRegistry
   extends IEntityRegistry<CityImprovement> {
-  getByCity(city: City): CityImprovement[];
+  getByCity(city: City, includeDestroyed?: boolean): CityImprovement[];
 }
 
 export class CityImprovementRegistry
   extends EntityRegistry<CityImprovement>
-  implements ICityImprovementRegistry {
+  implements ICityImprovementRegistry
+{
   constructor() {
     super(CityImprovement);
   }
 
-  getByCity(city: City) {
+  getByCity(city: City, includeDestroyed: boolean = false) {
     return this.filter(
       (cityImprovement: CityImprovement): boolean =>
-        cityImprovement.city() === city
+        cityImprovement.city() === city && !cityImprovement.destroyed()
     );
   }
 }

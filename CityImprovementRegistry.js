@@ -7,8 +7,8 @@ class CityImprovementRegistry extends EntityRegistry_1.EntityRegistry {
     constructor() {
         super(CityImprovement_1.default);
     }
-    getByCity(city) {
-        return this.filter((cityImprovement) => cityImprovement.city() === city);
+    getByCity(city, includeDestroyed = false) {
+        return this.filter((cityImprovement) => cityImprovement.city() === city && !cityImprovement.destroyed());
     }
 }
 exports.CityImprovementRegistry = CityImprovementRegistry;

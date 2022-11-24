@@ -6,13 +6,14 @@ import {
 } from '@civ-clone/core-registry/EntityRegistry';
 export interface ICityImprovementRegistry
   extends IEntityRegistry<CityImprovement> {
-  getByCity(city: City): CityImprovement[];
+  getByCity(city: City, includeDestroyed?: boolean): CityImprovement[];
 }
 export declare class CityImprovementRegistry
   extends EntityRegistry<CityImprovement>
-  implements ICityImprovementRegistry {
+  implements ICityImprovementRegistry
+{
   constructor();
-  getByCity(city: City): CityImprovement[];
+  getByCity(city: City, includeDestroyed?: boolean): CityImprovement[];
 }
 export declare const instance: CityImprovementRegistry;
 export default CityImprovementRegistry;
