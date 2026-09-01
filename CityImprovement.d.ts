@@ -13,7 +13,9 @@ export declare class CityImprovement
   extends Buildable
   implements ICityImprovement
 {
-  #private;
+  private _city;
+  private _destroyed;
+  private _ruleRegistry;
   constructor(city: City, ruleRegistry?: RuleRegistry);
   static build(city: City, ruleRegistry?: RuleRegistry): BuildableInstance;
   city(): City;

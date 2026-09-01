@@ -18,19 +18,19 @@ export interface ICityImprovement extends IDataObject {
 }
 
 export class CityImprovement extends Buildable implements ICityImprovement {
-  #city: City;
-  #destroyed: boolean = false;
-  #ruleRegistry: ICreatedRegistry;
+  private _city: City;
+  private _destroyed: boolean = false;
+  private _ruleRegistry: ICreatedRegistry;
 
   constructor(city: City, ruleRegistry: RuleRegistry = ruleRegistryInstance) {
     super();
 
     this.addKey('destroyed');
 
-    this.#city = city;
-    this.#ruleRegistry = ruleRegistry;
+    this._city = city;
+    this._ruleRegistry = ruleRegistry;
 
-    this.#ruleRegistry.process(Created, this, city);
+    this._ruleRegistry.process(Created, this, city);
   }
 
   public static build(
@@ -41,15 +41,15 @@ export class CityImprovement extends Buildable implements ICityImprovement {
   }
 
   city(): City {
-    return this.#city;
+    return this._city;
   }
 
   destroy(): void {
-    this.#destroyed = true;
+    this._destroyed = true;
   }
 
   destroyed() {
-    return this.#destroyed;
+    return this._destroyed;
   }
 }
 
