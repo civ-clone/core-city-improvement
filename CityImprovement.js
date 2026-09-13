@@ -27,5 +27,6 @@ class CityImprovement extends Buildable_1.Buildable {
     }
 }
 exports.CityImprovement = CityImprovement;
+CityImprovement.transient = ['_ruleRegistry'];
 exports.default = CityImprovement;
 //# sourceMappingURL=CityImprovement.js.map

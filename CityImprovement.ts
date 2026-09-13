@@ -18,6 +18,7 @@ export interface ICityImprovement extends IDataObject {
 }
 
 export class CityImprovement extends Buildable implements ICityImprovement {
+  static readonly transient = ['_ruleRegistry'];
   private _city: City;
   private _destroyed: boolean = false;
   private _ruleRegistry: ICreatedRegistry;
