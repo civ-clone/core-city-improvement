@@ -12,6 +12,7 @@ export declare class CityImprovementRegistry
   extends EntityRegistry<CityImprovement>
   implements ICityImprovementRegistry
 {
+  private _byCity;
   constructor();
   getByCity(city: City, includeDestroyed?: boolean): CityImprovement[];
 }
